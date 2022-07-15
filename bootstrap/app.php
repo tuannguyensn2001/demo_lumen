@@ -23,9 +23,9 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-// $app->withFacades();
+ $app->withFacades();
 
-// $app->withEloquent();
+ $app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -105,6 +105,14 @@ $app->configure('app');
 | can respond to, as well as the controllers that may handle them.
 |
 */
+
+$app->middleware([
+    \App\Http\Middleware\CorsMiddleware::class
+]);
+
+$app->routeMiddleware([
+    "auth" => \App\Http\Middleware\JwtAuth::class
+]);
 
 $app->router->group([
     'namespace' => 'App\Http\Controllers',

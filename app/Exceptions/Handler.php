@@ -35,6 +35,12 @@ class Handler extends ExceptionHandler
      */
     public function report(Throwable $exception)
     {
+
+        if ($exception instanceof \App\Exceptions\HttpException){
+            return response()->json([
+                "message" => $exception->getMessage()
+            ],$exception->statusCode);
+        }
         parent::report($exception);
     }
 
@@ -49,6 +55,13 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+
+        if ($exception instanceof \App\Exceptions\HttpException){
+            return response()->json([
+                "message" => $exception->getMessage()
+            ],$exception->statusCode);
+        }
+
         return parent::render($request, $exception);
     }
 }

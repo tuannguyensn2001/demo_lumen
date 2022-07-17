@@ -13,11 +13,13 @@
 |
 */
 
-$router->group(['prefix' => '/api/v1'],function() use ($router) {
-    $router->post("/auth/register",'AuthController@register');
-    $router->post("/auth/login","AuthController@login");
-    $router->get("/auth/me",[
+$router->group(['prefix' => '/api/v1'], function () use ($router) {
+    $router->post("/auth/register", 'AuthController@register');
+    $router->post("/auth/login", "AuthController@login");
+    $router->get("/auth/me", [
         "uses" => 'AuthController@getMe',
         'middleware' => 'auth'
     ]);
+
+    $router->get("/products", 'ProductController@index');
 });
